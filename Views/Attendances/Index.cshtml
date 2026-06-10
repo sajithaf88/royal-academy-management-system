@@ -1,0 +1,79 @@
+﻿@model IEnumerable<RoyalAcademy.Models.Attendance>
+
+<style>
+    body {
+        background-color: #f5f7fa;
+    }
+
+    .page-title {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    .card-box {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .btn-primary {
+        background-color: #4e73df;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
+    }
+
+    .table thead {
+        background-color: #4e73df;
+        color: white;
+    }
+
+    .form-control {
+        border-radius: 8px;
+    }
+</style>
+
+@{
+    ViewData["Title"] = "Attendance";
+}
+
+<h1>Attendance</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Student.StudentCode - @item.Student.FullName
+                </td>
+                <td>
+                    @item.Date.ToString("dd-MM-yyyy")
+                </td>
+                <td>
+                    @(item.IsPresent ? "Present" : "Absent")
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

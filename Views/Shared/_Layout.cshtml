@@ -1,0 +1,134 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RoyalAcademy</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background-color: #ffffff;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-light bg-white shadow-sm">
+                <div class="container-fluid">
+
+                    <a class="navbar-brand text-primary"
+                       asp-controller="Home"
+                       asp-action="Index">
+                        RoyalAcademy
+                    </a>
+
+                    <!-- ✅ REQUIRED toggler -->
+                    <button class="navbar-toggler" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#mainNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="mainNavbar">
+                        <ul class="navbar-nav me-auto">
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
+                            </li>
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle"
+                                       href="#"
+                                       role="button"
+                                       data-bs-toggle="dropdown">
+                                        Academics
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-controller="Students" asp-action="Index">Students</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Teachers" asp-action="Index">Teachers</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Courses" asp-action="Index">Courses</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Attendances" asp-action="Index">Attendance</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Exams" asp-action="Index">Exams</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Results" asp-action="Index">Results</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Fees" asp-action="Index">Fees</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle"
+                                       href="#"
+                                       role="button"
+                                       data-bs-toggle="dropdown">
+                                        Reports
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-controller="Reports" asp-action="StudentsReport">Students</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Reports" asp-action="AttendanceReport">Attendance</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Reports" asp-action="ResultsReport">Results</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Reports" asp-action="FeesReport">Fees</a></li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+
+                        <!-- Right side -->
+                        <div class="d-flex align-items-center">
+                            <span class="me-3 text-muted">
+                                @User.Identity?.Name
+                            </span>
+
+                            <form asp-area="Identity"
+                                  asp-page="/Account/Logout"
+                                  method="post">
+                                <button class="btn btn-danger btn-sm">Logout</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+    }
+
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+    <footer>
+        &copy; 2026 - RoyalAcademy
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

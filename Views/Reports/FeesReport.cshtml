@@ -1,0 +1,30 @@
+﻿@model IEnumerable<RoyalAcademy.Models.Fee>
+
+@{
+    ViewData["Title"] = "Fees Report";
+}
+
+<h2>Fees Report</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student Code</th>
+            <th>Student Name</th>
+            <th>Amount</th>
+            <th>Payment Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Student.StudentCode</td>
+                <td>@item.Student.FullName</td>
+                <td>@item.Amount</td>
+                <td>@item.PaymentDate.ToString("dd-MM-yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<RoyalAcademy.Models.Exam>
+
+<h2>Exams</h2>
+
+<a asp-action="Create" class="btn btn-success mb-3">Create Exam</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Exam</th>
+            <th>Course</th>
+            <th>Date</th>
+            <th>Max Marks</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ExamName</td>
+                <td>@item.Course?.CourseName</td>
+                <td>@item.ExamDate.ToShortDateString()</td>
+                <td>@item.MaxMarks</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

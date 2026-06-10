@@ -1,0 +1,31 @@
+﻿@model RoyalAcademy.Models.Student
+
+<h2>Edit Student</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="StudentCode" />
+
+    <div class="mb-3">
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DateOfBirth"></label>
+        <input asp-for="DateOfBirth" type="date" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CourseId">Course</label>
+        <select asp-for="CourseId" asp-items="ViewBag.CourseId" class="form-select"></select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

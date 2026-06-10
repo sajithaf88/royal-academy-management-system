@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<IdentityUser>
+
+
+<h2>User Management</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Assign Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>
+                    <a asp-action="AssignRole"
+                       asp-route-userId="@user.Id"
+                       asp-route-role="User"
+                       class="btn btn-sm btn-primary">
+                        Make User
+                    </a>
+
+                    <a asp-action="AssignRole"
+                       asp-route-userId="@user.Id"
+                       asp-route-role="Admin"
+                       class="btn btn-sm btn-danger">
+                        Make Admin
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<RoyalAcademy.Models.Result>
+
+@{
+    ViewData["Title"] = "Results Report";
+}
+
+<h2>Results Report</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student Code</th>
+            <th>Student Name</th>
+            <th>Exam</th>
+            <th>Marks</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Student.StudentCode</td>
+                <td>@item.Student.FullName</td>
+                <td>@item.Exam.ExamName</td>
+                <td>@item.MarksObtained</td>
+            </tr>
+        }
+    </tbody>
+</table>

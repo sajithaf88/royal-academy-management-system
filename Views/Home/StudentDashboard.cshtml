@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Student Dashboard";
+    var student = ViewBag.Student;
+    var exams = ViewBag.Exams;
+    var attendance = ViewBag.Attendance;
+}
+
+<style>
+    .dashboard-title {
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .info-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+    }
+
+        .info-card h5 {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+    table {
+        margin-bottom: 0;
+    }
+</style>
+
+<h2 class="dashboard-title">Welcome, @student.FullName</h2>
+
+<div class="info-card">
+    <h5>🎓 Course Information</h5>
+    <p><strong>Course:</strong> @student.Course.CourseName</p>
+    <p><strong>Student Code:</strong> @student.StudentCode</p>
+</div>
+
+<div class="info-card">
+    <h5>📝 Upcoming Exams</h5>
+
+    @if (exams.Count == 0)
+    {
+        <p class="text-muted">No exams scheduled.</p>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Exam Name</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var e in exams)
+                {
+                    <tr>
+                        <td>@e.ExamName</td>
+                        <td>@e.ExamDate.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+<div class="info-card">
+    <h5>📊 Attendance</h5>
+
+    @if (attendance.Count == 0)
+    {
+        <p class="text-muted">No attendance records found.</p>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in attendance)
+                {
+                    <tr>
+                        <td>@a.Date.ToShortDateString()</td>
+                        <td>
+                            @if (a.IsPresent)
+                            {
+                                <span class="badge bg-success">Present</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Absent</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,14 @@
+﻿@model RoyalAcademy.Models.Student
+
+<h2>Student Details</h2>
+
+<table class="table table-bordered">
+    <tr><th>Code</th><td>@Model.StudentCode</td></tr>
+    <tr><th>Name</th><td>@Model.FullName</td></tr>
+    <tr><th>Email</th><td>@Model.Email</td></tr>
+    <tr><th>DOB</th><td>@Model.DateOfBirth.ToShortDateString()</td></tr>
+    <tr><th>Course</th><td>@Model.Course?.CourseName</td></tr>
+</table>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back</a>
